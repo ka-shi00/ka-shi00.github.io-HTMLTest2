@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>自作英単語帳</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/main.js"> </script>
+</head>
+<body>
+    <div class = "box1">
+        
+        <p>英単語(なぜかひらがなないと中国語にされる)</p>
+        <input type="file" id="file1" />
+        <pre id="pre1"></pre>
+        <button class = "question" type="button" onclick="Question()">出題</button>
+        <div class = "text">
+            <p id="questionText"></p>
+        </div>
+        <input type="text" name="answer" id="answer">
+        <button type="button" onclick="Answer()">解答</button>
+        <div class = "text2">
+            <p id="qAnswer"></p>
+            <span style="color: red"><p id="Correct"></p></span>
+            <span style="color: blue"><p id="Incorrect"></p></span>
+        </div>
+        
+        <div class = "checkbox01">
+            <input type="checkbox" id="inversion" name="checkbox01">
+            <label for="inversion">答え問題反転</label>
+        </div>
+    </div>
+</a>
+</body>
+</html>
+
+
