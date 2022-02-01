@@ -5,12 +5,15 @@
     <title>自作英単語帳</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/main.js"> </script>
+    <script>LoadTextFile(FILETYPE.EnglishWord)</script>
+    <script>LoadTextFile(FILETYPE.EnglishWord)</script>
+
 </head>
 <body>
     <div class = "box1">
         
         <p>英単語(なぜかひらがなないと中国語にされる)</p>
-        <input type="file" id="file1" />
+<!--        <input type="file" id="file1" />  -->
         <pre id="pre1"></pre>
         <button class = "question" type="button" onclick="Question()">出題</button>
         <div class = "text">

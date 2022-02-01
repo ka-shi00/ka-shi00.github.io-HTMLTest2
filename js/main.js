@@ -1,4 +1,4 @@
-'use struct'
+"use struct"
 let file;
 let reader;
 let str = [];
@@ -6,27 +6,63 @@ let word =[];
 let translate =[];
 let questionNum = 0;
 let splitFlag = false;
+let httpObj;
+
+// enumの代わり
+let FILETYPE = {
+      EnglishWord : 0
+    , HistoryWord : 1
+    , EnglishWord2 : 2
+};
+
+let FilePath = [
+      "https://api.github.com/search/repositories?q=javascript"
+    , "https://api.github.com/search/repositories?q=javascript"
+    , ""
+];
 
 // addEventListenerは一回しか起動されない。
-// もう一個addEventListenerを書けば解決するけどそれは2回目まで。
-// なので、無限ループ化すれば多分対応できるけど、そこまでするものでもないので、
-// このままでいく。
-window.addEventListener('load', () => {
-    const f = document.getElementById('file1');
-    f.addEventListener('change', evt => {
-        let input = evt.target;
-        if (input.files.length == 0) {
-        console.log('No file selected');
-        return;
-        }
-        file = input.files[0];
-        reader = new FileReader();
-        reader.onload = () => {
-            str.push(reader.result);
-        };
-        reader.readAsText(file);
-    });
-});
+// ページの読み込みが完了した時点なのでそれも当然か
+//window.addEventListener('load', () => {
+//    const f = document.getElementById('file1');
+//    f.addEventListener('change', evt => {
+//        let input = evt.target;
+//        if (input.files.length == 0) {
+//        console.log('No file selected');
+//        return;
+//        }
+//        file = input.files[0];
+//        reader = new FileReader();
+//        reader.onload = () => {
+//            str.push(reader.result);
+//        };
+//        reader.readAsText(file);
+//    });
+//});
+
+function LoadTextFile(type)
+{
+    httpObj = new XMLHttpRequest();
+    httpObj.open("GET", FilePath[type], false);   // 第三引数で同期、非同期を切り替え
+    httpObj.send(null);
+    
+    // 同期処理なので直接呼ぶ
+    displayData();
+    
+    // TODO:直接関数ポインタみたいに渡すことはできないのか？
+    // 同期処理では状態変更がすべて終わっているので、
+    // 状態変更をキャッチできない。
+    //httpObj.onreadystatechange = function(type) {
+    //    displayData(type);
+    //};
+}
+
+function displayData(type)
+{
+    if (httpObj.readyState === 4 && httpObj.status === 200) {
+        str.push(httpObj.responseText);
+    }
+}
 
 function Question()
 {
@@ -129,5 +165,12 @@ function Split()
     //      アルゴリズム見直したほうが絶対にいい。
     word.length = word.length - 1;
     translate.length = translate.length - 1;
+}
+
+// TODO:汎用関数
+//      utility.js作ろう
+function dispMsg(msg)
+{
+    console.log(msg);
 }
 
