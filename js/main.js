@@ -2,8 +2,8 @@
 let file;
 let reader;
 let str = [];
-let word =[];
-let translate =[];
+let word =[[],[],[]];
+let translate =[[],[],[]];
 let questionNum = 0;
 let splitFlag = false;
 let httpObj;
