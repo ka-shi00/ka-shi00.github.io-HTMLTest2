@@ -17,7 +17,7 @@ let FILETYPE = {
 
 let FilePath = [
       "data/text/test.txt"
-    , "https://api.github.com/search/repositories?q=javascript"
+    , ""
     , ""
 ];
 
