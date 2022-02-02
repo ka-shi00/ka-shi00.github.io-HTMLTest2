@@ -141,7 +141,7 @@ function Split()
         }
         else if( mode == 1)
         {
-            if( (str[0].charAt(i) != "/") && (str[0].charAt(i) != "\r"))
+            if( (str[0].charAt(i) != "/") && (str[0].charAt(i) != "\n"))
             {
                 translate[translateCount] += str[0].charAt(i);
             }
@@ -154,7 +154,7 @@ function Split()
         }
         else if( mode == 2)
         {
-            if( str[0].charAt(i) == "\n" && str[0].charAt(i + 1) != "\r")
+            if( str[0].charAt(i) == "\n" && str[0].charAt(i + 1) != "\n")
             {
                 mode = 0;
             }
