@@ -191,7 +191,7 @@ function GetRadioButtonNum(name)
     
     for( let i = 0; i < radioButton.length; ++i)
     {
-        if( radioButto,item(i).checked)
+        if( radioButto.item(i).checked)
         {
             break;
         }
