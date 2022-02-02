@@ -74,9 +74,10 @@ function Question()
         splitFlag = true;
     }
     QuestionRequest();
+    const selectNum = GetRadioButtonNum("select");
     const inversion = document.getElementById("inversion").checked;
     let questionText = document.getElementById("questionText");
-    questionText.innerHTML = !inversion ? word[questionNum] : translate[questionNum];
+    questionText.innerHTML = !inversion ? word[selectNum][questionNum] : translate[selectNum][questionNum];
     
     let answerText = document.getElementById("qAnswer");
     answerText.innerHTML = "";
@@ -88,14 +89,16 @@ function Question()
 
 function QuestionRequest()
 {
-    questionNum = Math.floor( Math.random() * word.length );
+    const selectNum = GetRadioButtonNum("select");
+    questionNum = Math.floor( Math.random() * word[selectNum].length );
     console.log(questionNum);
 }
 
 function Answer()
 {
+    const selectNum = GetRadioButtonNum("select");
     const inversion = document.getElementById("inversion").checked;
-    let tmp = !inversion ? translate[questionNum] : word[questionNum];
+    let tmp = !inversion ? translate[selectNum][questionNum] : word[selectNum][questionNum];
     const ans = tmp.split("・");
     const textArea = document.getElementById("answer");
     
@@ -179,3 +182,19 @@ function dispMsg(msg)
     console.log(msg);
 }
 
+function GetRadioButtonNum(id)
+{
+    const radioButton = document.getElementById(id);
+    let count = 0;
+    
+    for( let i = 0; i < radioButton.length; ++i)
+    {
+        if( radioButto,item(i).checked)
+        {
+            break;
+        }
+        ++count;
+    }
+    
+    return count;
+}
