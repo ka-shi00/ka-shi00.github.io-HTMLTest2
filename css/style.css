@@ -14,7 +14,7 @@ body{
     background: #dddddd;
     border: solid 3px #6091d3;/*線*/
     border-radius: 10px;/*角の丸み*/
-    line-height:0px;
+    line-height:8px;
 }
 
 /* チェックボックス01 */
