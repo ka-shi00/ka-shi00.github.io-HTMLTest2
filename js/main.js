@@ -131,6 +131,8 @@ function Split()
     
     for( let num = 0; num < FILETYPE.END; ++num)
     {
+        wordCount = 0;
+        translateCount = 0;
         for( let i = 0; i < str[num].length; ++i)
         {
             if( mode == 0)
