@@ -13,12 +13,13 @@ let FILETYPE = {
       EnglishWord : 0
     , HistoryWord : 1
     , EnglishWord2 : 2
+    , END : 3
 };
 
 let FilePath = [
       "data/text/間違いやすい英単語.txt"
-    , ""
-    , ""
+    , "data/text/間違えた日本史単語.txt"
+    , "data/text/検索した英単語.txt"
 ];
 
 // addEventListenerは一回しか起動されない。
@@ -122,49 +123,53 @@ function Split()
 {
     let wordCount = translateCount = 0;
     let mode = 0;   // 0:word, 1:translate 2:発音ゾーン、今は取得しない
-    word[0] = "";
-    translate[0] = "";
-    for( let i = 0; i < str[0].length; ++i)
+    word[0][0] = "";
+    translate[0][0] = "";
+    
+    for( let num = 0; num < FILETYPE.END; ++num)
     {
-        if( mode == 0)
+        for( let i = 0; i < str[num].length; ++i)
         {
-            if(str[0].charAt(i) != ',')
+            if( mode == 0)
             {
-                word[wordCount] += str[0].charAt(i);
+                if(str[num].charAt(i) != ',')
+                {
+                    word[num][wordCount] += str[num].charAt(i);
+                }
+                else
+                {
+                    wordCount++;
+                    word[num][wordCount] = "";
+                    mode = 1;
+                }
             }
-            else
+            else if( mode == 1)
             {
-                wordCount++;
-                word[wordCount] = "";
-                mode = 1;
+                if( (str[num].charAt(i) != "/") && (str[num].charAt(i) != "\n"))
+                {
+                    translate[num][translateCount] += str[num].charAt(i);
+                }
+                else
+                {
+                    translateCount++;
+                    translate[num][translateCount] = "";
+                    mode = 2;
+                }
+            }
+            else if( mode == 2)
+            {
+                if( str[num].charAt(i) == "\n" && str[num].charAt(i + 1) != "\n")
+                {
+                    mode = 0;
+                }
             }
         }
-        else if( mode == 1)
-        {
-            if( (str[0].charAt(i) != "/") && (str[0].charAt(i) != "\n"))
-            {
-                translate[translateCount] += str[0].charAt(i);
-            }
-            else
-            {
-                translateCount++;
-                translate[translateCount] = "";
-                mode = 2;
-            }
-        }
-        else if( mode == 2)
-        {
-            if( str[0].charAt(i) == "\n" && str[0].charAt(i + 1) != "\n")
-            {
-                mode = 0;
-            }
-        }
+        // TODO:最後に""だけの要素が残るので取り出し。
+        //      アルゴリズム見直したほうが絶対にいい。
+        word[num].length = word[num].length - 1;
+        translate[num].length = translate[num].length - 1;
     }
     
-    // TODO:最後に""だけの要素が残るので取り出し。
-    //      アルゴリズム見直したほうが絶対にいい。
-    word.length = word.length - 1;
-    translate.length = translate.length - 1;
 }
 
 // TODO:汎用関数
