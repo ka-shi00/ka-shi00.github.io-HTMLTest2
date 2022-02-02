@@ -16,7 +16,7 @@ let FILETYPE = {
 };
 
 let FilePath = [
-      "data/text/test.txt"
+      "data/text/間違いやすい英単語.txt"
     , ""
     , ""
 ];
