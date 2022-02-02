@@ -184,9 +184,9 @@ function dispMsg(msg)
     console.log(msg);
 }
 
-function GetRadioButtonNum(id)
+function GetRadioButtonNum(name)
 {
-    const radioButton = document.getElementById(id);
+    const radioButton = document.getElementsByName(name);
     let count = 0;
     
     for( let i = 0; i < radioButton.length; ++i)
